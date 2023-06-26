@@ -1,0 +1,14 @@
+version: "3.4"
+
+services:
+  app:
+    build:
+      context: .
+#      args:
+#        - UID=${UID:-1000}
+#        - GID=${GID:-1000}
+    volumes:
+      - ./app:/client
+    ports:
+      - "3000:3000"
+    tty: true
