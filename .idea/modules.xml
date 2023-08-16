@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/arc-client.iml" filepath="$PROJECT_DIR$/.idea/arc-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/erc-client.iml" filepath="$PROJECT_DIR$/.idea/erc-client.iml" />
     </modules>
   </component>
 </project>

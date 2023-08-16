@@ -1,0 +1,23 @@
+$family: "Work Sans", "Inter", apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+@use "vuetify" with (
+  $body-font-family: $family
+);
+
+:root {
+  font-family: "Work Sans", sans-serif;
+}
+
+:visited {
+  color: inherit;
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: "Work Sans", sans-serif;
+  }
+}
+
+
+
