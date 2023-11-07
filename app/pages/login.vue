@@ -14,34 +14,39 @@
 </script>
 
 <template>
-  <v-card>
-    <v-card-title>Login</v-card-title>
-    <v-sheet
-      width="300"
-      class="mx-auto"
-    >
-      <v-form @submit.prevent>
-        <v-text-field
-            label="e-mail"
-            v-model="email"
-        />
-        <v-text-field
-            type="password"
-            label="password"
-            v-model="password"
-        />
-      </v-form>
-    </v-sheet>
-    <v-card-actions>
-      <NuxtLink to="/">
-        <v-btn>cancel</v-btn>
-      </NuxtLink>
-      <v-spacer/>
-      <v-btn
-          color="primary"
-          :disabled="isSubmitDisabled"
-          @click="signIn({ email, password }, {callbackUrl: '/'})"
-      >login</v-btn>
-    </v-card-actions>
-  </v-card>
+  <v-dialog
+      :model-value="true"
+      width="400px"
+      :persistent="true"
+  >
+    <v-card variant="outlined">
+      <v-card-title class="bg-secondary">Login</v-card-title>
+        <v-form
+            class="pa-6"
+            @submit.prevent
+        >
+          <v-text-field
+              label="e-mail"
+              v-model="email"
+          />
+          <v-text-field
+              type="password"
+              label="password"
+              v-model="password"
+          />
+        </v-form>
+      <v-card-actions>
+        <NuxtLink to="/">
+          <v-btn :flat="true">cancel</v-btn>
+        </NuxtLink>
+        <v-spacer/>
+        <v-btn
+            :flat="true"
+            color="secondary"
+            :disabled="isSubmitDisabled"
+            @click="signIn({ email, password }, {callbackUrl: '/'})"
+        >login</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>

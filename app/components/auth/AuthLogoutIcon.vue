@@ -3,9 +3,10 @@
 </script>
 
 <template>
-  <v-tooltip text="Logout">
+  <v-tooltip text="logout">
     <template v-slot:activator="{ props }">
         <v-icon
+            class="mr-6"
             v-bind="props"
             @click="isOpen = true"
         >

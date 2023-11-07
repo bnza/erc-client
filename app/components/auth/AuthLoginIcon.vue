@@ -1,10 +1,11 @@
 <template>
-  <v-tooltip text="Login">
+  <v-tooltip text="login">
     <template v-slot:activator="{ props }">
       <NuxtLink
           to="/login"
       >
         <v-icon
+            class="mr-6"
             v-bind="props"
         >
           mdi-login
