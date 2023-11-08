@@ -11,7 +11,7 @@
       width="400px"
       :persistent="true"
   >
-    <v-card variant="outlined">
+    <v-card variant="flat">
       <v-card-title class="bg-secondary">Logout</v-card-title>
       <v-card-text>
         Are you sure you want to logout

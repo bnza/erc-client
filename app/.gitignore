@@ -17,6 +17,6 @@ logs
 .fleet
 
 # Local env files
+!.env.dist
 .env
-.env.*
-!.env.example
+
