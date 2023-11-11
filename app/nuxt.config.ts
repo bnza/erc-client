@@ -9,6 +9,7 @@ export default defineNuxtConfig({
         {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Work+Sans&display=swap'}
       ]
     },
+    baseURL: '/app'
   },
   css: [
     // 'vuetify/lib/styles/main.sass',
