@@ -1,13 +1,11 @@
 <script setup lang="ts">
 definePageMeta({
-  auth: false
-})
+  auth: false,
+});
 </script>
 
 <template>
-  <p>sites {{$route.params.id}}</p>
+  <p>sites {{ $route.params.id }}</p>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,13 +1,11 @@
 <script setup lang="ts">
 definePageMeta({
-  auth: false
-})
+  auth: false,
+});
 </script>
 
 <template>
   <p>data</p>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

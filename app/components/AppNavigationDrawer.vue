@@ -6,14 +6,44 @@ import { useUiAppNavigationDrawerStore } from "~/stores/ui";
 
   const { visible } = storeToRefs(uiStore)
 
+  const open = ref([])
+
 </script>
 
 <template>
   <v-navigation-drawer
       :model-value="visible"
       :permanent="true"
-      width="150"
-  ></v-navigation-drawer>
+  >
+    <v-list v-model:opened="open">
+      <v-list-item
+          nuxt
+          to="/"
+          router
+          exact
+          prepend-icon="mdi-home"
+          title="Home"
+      >
+      </v-list-item>
+      <v-list-group value="Data">
+        <template v-slot:activator="{ props }">
+          <v-list-item
+              v-bind="props"
+              prepend-icon="mdi-text-box"
+              title="Data"
+          ></v-list-item>
+        </template>
+        <v-list-item
+            nuxt
+            to="/data/sites"
+            router
+            exact
+            title="Site"
+        >
+        </v-list-item>
+      </v-list-group>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <style scoped>

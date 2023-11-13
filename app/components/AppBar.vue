@@ -17,7 +17,7 @@ const uiStore = useUiAppNavigationDrawerStore()
       <v-app-bar-nav-icon @click.stop="uiStore.toggleVisible()"></v-app-bar-nav-icon>
     </template>
 
-    <v-app-bar-title class="font-weight-bold">ERC MEDGREENREV project</v-app-bar-title>
+    <v-app-bar-title class="title font-weight-bold">ERC MEDGREENREV project</v-app-bar-title>
 
     <v-spacer></v-spacer>
 
@@ -26,6 +26,8 @@ const uiStore = useUiAppNavigationDrawerStore()
   </v-app-bar>
 </template>
 
-<style scoped>
-
+<style scoped lang="sass">
+.title
+  font-family: 'Orbitron', 'Work Sans', Arial, sans-serif !important
+  font-weight: 900
 </style>

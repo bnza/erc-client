@@ -1,15 +1,18 @@
 import vuetify from 'vite-plugin-vuetify'
-import 'dotenv/config'
 
 export default defineNuxtConfig({
   ssr: false,
   app: {
     head: {
       link: [
-        {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Work+Sans&display=swap'}
+        {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Work+Sans&display=swap'},
+        {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap'}
       ]
     },
     baseURL: '/app'
+  },
+  appConfig: {
+    apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:8000/api',
   },
   css: [
     // 'vuetify/lib/styles/main.sass',
