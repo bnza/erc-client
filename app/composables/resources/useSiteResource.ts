@@ -31,6 +31,7 @@ export function useSiteResource() {
       key: "public",
       value: "public",
       title: "public",
+      sortable: false,
     },
   ] as const;
 

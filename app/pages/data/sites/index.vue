@@ -9,7 +9,8 @@ definePageMeta({
   auth: false,
 });
 
-const { items, itemsPerPage, totalItems, pending } = await fetchCollection();
+const { items, itemsPerPage, totalItems, pending, sortBy, page } =
+  await fetchCollection();
 
 const { headers } = useSiteResource();
 </script>
@@ -20,8 +21,11 @@ const { headers } = useSiteResource();
     :headers="headers"
     :items-length="totalItems"
     :items="items"
+    :page="page"
     :loading="pending"
+    :sortBy="sortBy"
     density="compact"
+    @update:sortBy="sortBy = $event"
   >
     <template #[`item.public`]="{ item }">
       <v-checkbox-btn
