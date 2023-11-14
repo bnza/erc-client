@@ -12,6 +12,7 @@
     >
       <slot> Main content </slot>
     </v-main>
+    <app-snackbar></app-snackbar>
   </v-layout>
 </template>
 

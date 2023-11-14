@@ -1,6 +1,7 @@
 import type { UseFetchOptions } from "nuxt/app";
 import { defu } from "defu";
 import { stringify } from "qs";
+import { useUiAppSnackbar } from "~/stores/ui";
 
 export function useApiFetch<T>(
   url: string | (() => string),
@@ -31,6 +32,18 @@ export function useApiFetch<T>(
     },
 
     onResponseError(_ctx) {
+      const message = "Expired JWT Token";
+      if (_ctx.response?._data?.message === message) {
+        const uiSnackbarStore = useUiAppSnackbar();
+        uiSnackbarStore.show({
+          _text: "Authorization expired. Please login again",
+          _color: "error",
+          _vertical: true,
+          _timeout: -1,
+        });
+        const { signOut } = useAuth();
+        signOut({ callbackUrl: "/" });
+      }
       console.log(_ctx);
       // throw new myBusinessError()
     },
