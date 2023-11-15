@@ -14,23 +14,38 @@ export async function useResourceCollection<
   url: string | (() => string),
   options: UseFetchOptions<JsonLdResourceCollection<ResourceType>> = {},
 ) {
-  const itemsPerPage = ref(10);
-
-  const page = ref(1);
-
-  const sortBy: Ref<Array<SortItem>> = ref([
-    {
-      key: "id",
-      order: "asc",
-    },
-  ]);
+  const paginationOption: {
+    itemsPerPage: number;
+    page: number;
+    sortBy: Array<SortItem>;
+  } = reactive({
+    itemsPerPage: 10,
+    page: 1,
+    sortBy: [
+      {
+        key: "id",
+        order: "asc",
+      },
+    ],
+  });
 
   const query = computed(() => {
     const order: Record<string, string> = {};
-    sortBy.value.forEach((sortItem) => {
-      order[sortItem.key] = sortItem.order;
+    paginationOption.sortBy.forEach((sortItem) => {
+      let _order = "asc";
+      if (typeof sortItem.order === "boolean") {
+        _order = sortItem.order ? "asc" : "desc";
+      }
+      if (typeof sortItem.order === "string") {
+        _order = sortItem.order;
+      }
+      order[sortItem.key] = _order;
     });
-    return { order };
+    return {
+      order,
+      page: paginationOption.page,
+      itemsPerPage: paginationOption.itemsPerPage,
+    };
   });
 
   const _options = defu(options, { query });
@@ -43,5 +58,5 @@ export async function useResourceCollection<
   const items = computed(() => data.value?.["hydra:member"]);
   const totalItems = computed(() => data.value?.["hydra:totalItems"] || 0);
 
-  return { items, totalItems, itemsPerPage, pending, sortBy, page };
+  return { items, totalItems, paginationOption, pending };
 }

@@ -27,7 +27,7 @@ const { vertical, multiline, text, title, color, timeout, visible } =
       <v-btn
         icon="mdi-close-circle-outline"
         variant="text"
-        @click="uiStore.$patch({ visible: false })"
+        @click="uiStore.reset()"
       ></v-btn>
     </template>
   </v-snackbar>

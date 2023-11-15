@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { VDataTableServer } from "vuetify/labs/components";
 import {
   fetchCollection,
   useSiteResource,
@@ -9,7 +8,7 @@ definePageMeta({
   auth: false,
 });
 
-const { items, itemsPerPage, totalItems, pending, sortBy, page } =
+const { items, paginationOption, totalItems, pending } =
   await fetchCollection();
 
 const { headers } = useSiteResource();
@@ -17,15 +16,15 @@ const { headers } = useSiteResource();
 
 <template>
   <v-data-table-server
-    v-model:items-per-page="itemsPerPage"
+    :items-per-page.sync="paginationOption.itemsPerPage"
     :headers="headers"
     :items-length="totalItems"
     :items="items"
-    :page="page"
+    :page.sync="paginationOption.page"
     :loading="pending"
-    :sortBy="sortBy"
+    :sortBy.sync="paginationOption.sortBy"
     density="compact"
-    @update:sortBy="sortBy = $event"
+    @update:options="Object.assign(paginationOption, $event)"
   >
     <template #[`item.public`]="{ item }">
       <v-checkbox-btn

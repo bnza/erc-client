@@ -5,6 +5,7 @@ import { useUiAppNavigationDrawerStore } from "~/stores/ui";
 const uiStore = useUiAppNavigationDrawerStore();
 
 const { visible } = storeToRefs(uiStore);
+const { hasRoleAdmin } = useAppAuth();
 
 const open = ref([]);
 </script>
@@ -34,9 +35,26 @@ const open = ref([]);
           nuxt
           to="/data/sites"
           router
-          exact
           title="Site"
           data-testid="app-nav-drawer-li-sites"
+        >
+        </v-list-item>
+      </v-list-group>
+      <v-list-group v-if="hasRoleAdmin" value="Admin">
+        <template v-slot:activator="{ props }">
+          <v-list-item
+            v-bind="props"
+            prepend-icon="mdi-cog-box"
+            title="Admin"
+            data-testid="app-nav-drawer-li-admin"
+          ></v-list-item>
+        </template>
+        <v-list-item
+          nuxt
+          to="/admin/users"
+          router
+          title="Users"
+          data-testid="app-nav-drawer-li-users"
         >
         </v-list-item>
       </v-list-group>

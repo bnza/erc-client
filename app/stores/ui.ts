@@ -40,6 +40,12 @@ export const useUiAppSnackbar = defineStore("useAppSnackbar", () => {
     _timeout = 5000,
     _multiline = false,
   }) {
+    if (timeout.value === -1) {
+      if (_timeout === -1) {
+        text.value += `\n${_text}`;
+      }
+      return;
+    }
     multiline.value = _multiline;
     vertical.value = _vertical;
     text.value = _text;

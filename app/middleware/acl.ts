@@ -1,4 +1,5 @@
 import type { Role } from "~/composables/useAppAuth";
+import { useUiAppSnackbar } from "~/stores/ui";
 export default defineNuxtRouteMiddleware((to) => {
   const { isAuthenticated, hasRole } = useAppAuth();
   const requiredRole = to.meta.requiredRole as Role;
@@ -12,8 +13,12 @@ export default defineNuxtRouteMiddleware((to) => {
   }
 
   if (!hasRole.value(requiredRole)) {
-    // @TODO use snackbar to notify
-    console.error(`Forbidden: ${requiredRole} role required`);
+    useUiAppSnackbar().show({
+      _text: `Access to page forbidden: ${requiredRole} role required`,
+      _color: "error",
+      _vertical: true,
+      _timeout: -1,
+    });
     return navigateTo("/");
   }
 });
