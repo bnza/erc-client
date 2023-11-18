@@ -22,7 +22,9 @@ export interface SiteResourceItem extends ProtectedResourceItem<number> {
   name: string;
   code: string;
 }
-
 export interface Resource {
-  apiPath;
+  apiPath: string;
+  appPath: string;
+  name: string;
+  label: Array["string"];
 }

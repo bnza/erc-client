@@ -1,6 +1,4 @@
 import { defineStore } from "pinia";
-import { CREATE_TEXT } from "@vue/compiler-core";
-import { timeout } from "ioredis/built/utils";
 export const useUiAppNavigationDrawerStore = defineStore(
   "uiAppNavigationDrawer",
   () => {
@@ -14,7 +12,7 @@ export const useUiAppNavigationDrawerStore = defineStore(
   },
 );
 
-export const useUiAppSnackbar = defineStore("useAppSnackbar", () => {
+export const useUiAppSnackbar = defineStore("uiAppSnackbar", () => {
   const vertical = ref(false);
   const multiline = ref(false);
   const visible = ref(false);
@@ -66,4 +64,9 @@ export const useUiAppSnackbar = defineStore("useAppSnackbar", () => {
     show,
     reset,
   };
+});
+
+export const useUiApiFetchPending = defineStore("uiApiFetchPending", () => {
+  const pending = ref(false);
+  return { pending };
 });

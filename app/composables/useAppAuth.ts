@@ -3,7 +3,6 @@ export const enum Role {
   Editor = "ROLE_EDITOR",
   Admin = "ROLE_ADMIN",
 }
-
 export function useAppAuth() {
   const { data, status } = useAuth();
   const isAuthenticated = computed(() => unref(status) === "authenticated");

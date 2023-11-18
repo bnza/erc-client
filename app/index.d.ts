@@ -1,10 +1,10 @@
-import type {Role} from "~/composables/useAppAuth";
+import type { Role } from "~/composables/useAppAuth";
 
-declare module '#app' {
-    interface PageMeta {
-        requiredRole?: Role,
-        fromPage?: string
-    }
+declare module "#app" {
+  interface PageMeta {
+    requiredRole?: Role;
+    fromPage?: string;
+  }
 }
 
-export {}
+export {};

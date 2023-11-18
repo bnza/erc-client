@@ -1,12 +1,10 @@
-import type { Ref } from "@vue/reactivity";
 import type { UseFetchOptions } from "nuxt/app";
-import type { SortItem } from "~/composables/vuetify";
 import type {
+  SortItem,
   JsonLdResourceCollection,
   ProtectedResourceItem,
-} from "~/composables/resources";
+} from "~/composables";
 import { defu } from "defu";
-import { useApiFetchCollection } from "~/composables/useApiFetchCollection";
 
 export async function useResourceCollection<
   ResourceType extends ProtectedResourceItem<string | number>,

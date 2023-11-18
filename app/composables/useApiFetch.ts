@@ -1,22 +1,26 @@
 import type { UseFetchOptions } from "nuxt/app";
 import { defu } from "defu";
 import { stringify } from "qs";
-import { useUiAppSnackbar } from "~/stores/ui";
+import { useUiApiFetchPending, useUiAppSnackbar } from "~/stores/ui";
 
-export function useApiFetch<T>(
+export function useApiFetch<ResourceType>(
   url: string | (() => string),
-  options: UseFetchOptions<T> = {},
+  options: UseFetchOptions<ResourceType> = {},
 ) {
   const appConfig = useAppConfig();
   const { token } = useAuth();
 
   const { query, ..._options } = options;
 
-  const _url = computed(() =>
-    query?.value ? url + "?" + stringify(query.value) : "",
-  );
+  const _url = computed(() => {
+    let _url = url as string;
+    if (typeof url !== "string") {
+      _url = url();
+    }
+    return query?.value ? _url + "?" + stringify(query.value) : _url;
+  });
 
-  const defaults: UseFetchOptions<T> = {
+  const defaults: UseFetchOptions<ResourceType> = {
     baseURL: appConfig.apiBaseUrl,
     // this overrides the default key generation, which includes a hash of
     // url, method, headers, etc. - this should be used with care as the key
@@ -52,6 +56,11 @@ export function useApiFetch<T>(
 
   // for nice deep defaults, please use unjs/defu
   const params = defu(_options, defaults);
-
-  return useFetch(_url, params);
+  const uiApiFetchPending = useUiApiFetchPending();
+  uiApiFetchPending.$patch({ pending: true });
+  return useFetch<ResourceType>(_url, params as Record<string, any>).finally(
+    () => {
+      uiApiFetchPending.$patch({ pending: false });
+    },
+  );
 }

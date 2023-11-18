@@ -1,19 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import AppFooter from "~/components/AppFooter.vue";
+</script>
 
 <template>
-  <v-layout class="rounded rounded-md">
-    <app-bar></app-bar>
-
-    <app-navigation-drawer></app-navigation-drawer>
-
-    <v-main
-      class="d-flex align-center justify-center"
-      style="min-height: 300px"
-    >
-      <slot> Main content </slot>
-    </v-main>
-    <app-snackbar></app-snackbar>
-  </v-layout>
+  <app-bar></app-bar>
+  <app-navigation-drawer></app-navigation-drawer>
+  <v-main class="d-flex align-center justify-center">
+    <slot></slot>
+  </v-main>
+  <app-footer></app-footer>
+  <app-snackbar></app-snackbar>
 </template>
 
 <style scoped></style>
