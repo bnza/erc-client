@@ -1,8 +1,8 @@
 <script setup lang="ts">
 defineProps({
   isOpen: Boolean,
-});
-const { signOut } = useAuth();
+})
+const { signOut } = useAuth()
 </script>
 
 <template>
@@ -13,9 +13,7 @@ const { signOut } = useAuth();
       <v-card-actions>
         <v-btn @click="$emit('update:isOpen', false)">Cancel</v-btn>
         <v-spacer></v-spacer>
-        <v-btn color="secondary" @click="signOut({ callbackUrl: '/' })"
-          >Logout</v-btn
-        >
+        <v-btn color="secondary" @click="signOut({ callbackUrl: '/' })">Logout</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

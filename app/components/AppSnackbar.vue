@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { useUiAppSnackbar } from "~/stores/ui";
-import { storeToRefs } from "pinia";
+import { useUiAppSnackbar } from '~/stores/ui'
+import { storeToRefs } from 'pinia'
 
-const uiStore = useUiAppSnackbar();
-const { vertical, multiline, text, title, color, timeout, visible } =
-  storeToRefs(uiStore);
+const uiStore = useUiAppSnackbar()
+const { vertical, multiline, text, title, color, timeout, visible } = storeToRefs(uiStore)
 </script>
 
 <template>
@@ -24,11 +23,7 @@ const { vertical, multiline, text, title, color, timeout, visible } =
     </div>
 
     <template v-slot:actions v-if="timeout === -1">
-      <v-btn
-        icon="mdi-close-circle-outline"
-        variant="text"
-        @click="uiStore.reset()"
-      ></v-btn>
+      <v-btn icon="mdi-close-circle-outline" variant="text" @click="uiStore.reset()"></v-btn>
     </template>
   </v-snackbar>
 </template>

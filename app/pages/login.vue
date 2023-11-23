@@ -1,48 +1,43 @@
 <script setup lang="ts">
-import { useLoginRedirectStore } from "~/stores/loginRedirect";
-import { storeToRefs } from "pinia";
-import { useUiAppSnackbar } from "~/stores/ui";
+import { useLoginRedirectStore } from '~/stores/loginRedirect'
+import { storeToRefs } from 'pinia'
+import { useUiAppSnackbar } from '~/stores/ui'
 
 definePageMeta({
   auth: {
     unauthenticatedOnly: true,
-    navigateAuthenticatedTo: "/",
+    navigateAuthenticatedTo: '/',
   },
-});
-const { signIn } = useAuth();
-const { redirectUrl } = storeToRefs(useLoginRedirectStore());
-const uiSnackbarStore = useUiAppSnackbar();
+})
+const { signIn } = useAuth()
+const { redirectUrl } = storeToRefs(useLoginRedirectStore())
+const uiSnackbarStore = useUiAppSnackbar()
 
-const email = ref("");
-const password = ref("");
-const loginFailed = ref(false);
-const isLoading = ref(false);
-const loginFailedText = computed(() =>
-  loginFailed.value ? "Login failed!" : "",
-);
+const email = ref('')
+const password = ref('')
+const loginFailed = ref(false)
+const isLoading = ref(false)
+const loginFailedText = computed(() => (loginFailed.value ? 'Login failed!' : ''))
 const isSubmitDisabled = computed(() => {
-  return password.value.length === 0 || isLoading.value;
-});
+  return password.value.length === 0 || isLoading.value
+})
 
-const signInAndFeedback = async ({
-  email,
-  password,
-}: Record<string, string>) => {
-  isLoading.value = true;
-  loginFailed.value = false;
+const signInAndFeedback = async ({ email, password }: Record<string, string>) => {
+  isLoading.value = true
+  loginFailed.value = false
   try {
-    await signIn({ email, password }, { callbackUrl: redirectUrl.value });
+    await signIn({ email, password }, { callbackUrl: redirectUrl.value })
     uiSnackbarStore.show({
       _text: `User ${email} successfully logged in`,
-      _color: "success",
+      _color: 'success',
       _timeout: 5000,
-    });
+    })
   } catch (e) {
-    loginFailed.value = true;
+    loginFailed.value = true
   } finally {
-    isLoading.value = false;
+    isLoading.value = false
   }
-};
+}
 </script>
 
 <template>

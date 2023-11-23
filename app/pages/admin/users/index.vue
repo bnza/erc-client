@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Role } from "~/composables/useAppAuth";
+import { Role } from '~/composables/useAppAuth'
 
 definePageMeta({
-  middleware: ["acl"],
+  middleware: ['acl'],
   requiredRole: Role.Admin,
-});
+})
 </script>
 
 <template>

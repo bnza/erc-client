@@ -1,26 +1,19 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { useUiAppNavigationDrawerStore } from "~/stores/ui";
+import { storeToRefs } from 'pinia'
+import { useUiAppNavigationDrawerStore } from '~/stores/ui'
 
-const uiStore = useUiAppNavigationDrawerStore();
+const uiStore = useUiAppNavigationDrawerStore()
 
-const { visible } = storeToRefs(uiStore);
-const { hasRoleAdmin } = useAppAuth();
+const { visible } = storeToRefs(uiStore)
+const { hasRoleAdmin } = useAppAuth()
 
-const open = ref([]);
+const open = ref([])
 </script>
 
 <template>
   <v-navigation-drawer :model-value="visible" :permanent="true">
     <v-list v-model:opened="open">
-      <v-list-item
-        nuxt
-        to="/"
-        router
-        :exact="true"
-        prepend-icon="mdi-home"
-        title="Home"
-      >
+      <v-list-item nuxt to="/" router :exact="true" prepend-icon="mdi-home" title="Home">
       </v-list-item>
       <v-list-group value="Data">
         <template v-slot:activator="{ props }">

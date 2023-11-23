@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useUiAppNavigationDrawerStore } from "~/stores/ui";
+import { useUiAppNavigationDrawerStore } from '~/stores/ui'
 
-const { isAuthenticated, userIdentifier } = useAppAuth();
+const { isAuthenticated, userIdentifier } = useAppAuth()
 
-const uiStore = useUiAppNavigationDrawerStore();
+const uiStore = useUiAppNavigationDrawerStore()
 </script>
 
 <template>
@@ -15,9 +15,7 @@ const uiStore = useUiAppNavigationDrawerStore();
       ></v-app-bar-nav-icon>
     </template>
 
-    <v-app-bar-title class="title font-weight-bold"
-      >ERC MEDGREENREV project</v-app-bar-title
-    >
+    <v-app-bar-title class="title font-weight-bold">ERC MEDGREENREV project</v-app-bar-title>
 
     <v-spacer></v-spacer>
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useUiApiFetchPending } from "~/stores/ui";
-import { storeToRefs } from "pinia";
+import { useUiApiFetchPending } from '~/stores/ui'
+import { storeToRefs } from 'pinia'
 
-const { pending } = storeToRefs(useUiApiFetchPending());
+const { pending } = storeToRefs(useUiApiFetchPending())
 </script>
 
 <template>

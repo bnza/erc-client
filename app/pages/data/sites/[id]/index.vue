@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { useResourceSite } from "~/composables/resources/useResourceSite";
+import { useResourceSite } from '~/composables/resources/useResourceSite'
 
 definePageMeta({
   auth: false,
-});
+})
 
-const route = useRoute();
+const route = useRoute()
 
-const { resourceConfig, fetchItem } = useResourceSite();
-const { item, error } = await fetchItem(route.params.id);
-const code = computed(() => item.value?.code || "");
+const { resourceConfig, fetchItem } = useResourceSite()
+const { item, error } = await fetchItem(route.params.id)
+const code = computed(() => item.value?.code || '')
 </script>
 
 <template>

@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { useLoginRedirectStore } from "~/stores/loginRedirect";
+import { useLoginRedirectStore } from '~/stores/loginRedirect'
 
-const route = useRoute();
-const { setPreviousPath } = useLoginRedirectStore();
+const route = useRoute()
+const { setPreviousPath } = useLoginRedirectStore()
 /*onMounted(() => {
   console.log(route.fullPath);
 });*/
 watch(
   () => route.fullPath,
   () => {
-    setPreviousPath(route);
+    setPreviousPath(route)
   },
   { immediate: true },
-);
+)
 </script>
 
 <template>

@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { useResourceSite } from "~/composables/resources/useResourceSite";
+import { useResourceSite } from '~/composables/resources/useResourceSite'
 
 definePageMeta({
   auth: false,
-});
+})
 
-const { resourceConfig, headers, fetchCollection } = useResourceSite();
+const { resourceConfig, headers, fetchCollection } = useResourceSite()
 
-const { items, paginationOption, totalItems, pending } =
-  await fetchCollection();
+const { items, paginationOption, totalItems, pending } = await fetchCollection()
 </script>
 
 <template>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { PropType } from "vue";
-import type { ResourceConfig } from "~/composables";
+import type { PropType } from 'vue'
+import type { ResourceConfig } from '~/composables'
 
 defineProps({
   resource: Object as PropType<ResourceConfig>,
   itemId: String | Number,
-});
+})
 </script>
 
 <template>

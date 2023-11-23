@@ -1,1 +1,1 @@
-export type * from "./resources.d";
+export type * from './resources.d'
