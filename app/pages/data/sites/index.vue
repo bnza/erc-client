@@ -1,43 +1,21 @@
 <script setup lang="ts">
-import { useResourceSite } from '~/composables/resources/useResourceSite'
-
 definePageMeta({
   auth: false,
 })
-
-const { resourceConfig, headers, fetchCollection } = useResourceSite()
-
-const { items, paginationOption, totalItems, pending } = await fetchCollection()
+const { hasRoleAdmin } = useAppAuth()
+const { resourceConfig } = useResourceSite()
 </script>
 
 <template>
-  <app-data-card :title="resourceConfig.labels[1]">
+  <app-data-card :title="resourceConfig.labels[ResourceLabelNumber.Plural]">
+    <template #toolbar-append>
+      <navigation-resource-item-create
+        v-if="hasRoleAdmin"
+        :path="`${resourceConfig.appPath}/create`"
+      ></navigation-resource-item-create>
+    </template>
     <template #default>
-      <v-data-table-server
-        :items-per-page.sync="paginationOption.itemsPerPage"
-        :headers="headers"
-        :items-length="totalItems"
-        :items="items"
-        :page.sync="paginationOption.page"
-        :loading="pending"
-        :sortBy.sync="paginationOption.sortBy"
-        density="compact"
-        @update:options="Object.assign(paginationOption, $event)"
-      >
-        <template #[`item.id`]="{ item }">
-          <navigation-resource-item
-            :resource="resourceConfig"
-            :item-id="item.id"
-          ></navigation-resource-item>
-        </template>
-        <template #[`item.public`]="{ item }">
-          <v-checkbox-btn
-            :inline="true"
-            :readonly="true"
-            :model-value="item.public"
-          ></v-checkbox-btn>
-        </template>
-      </v-data-table-server>
+      <data-collection-table-site></data-collection-table-site>
     </template>
   </app-data-card>
 </template>

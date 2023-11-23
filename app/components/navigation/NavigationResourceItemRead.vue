@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import type { ResourceConfig } from '~/composables'
+import type { ApiResourceConfig } from '~/composables'
 
 defineProps({
-  resource: Object as PropType<ResourceConfig>,
+  resource: Object as PropType<ApiResourceConfig>,
   itemId: String | Number,
 })
 </script>

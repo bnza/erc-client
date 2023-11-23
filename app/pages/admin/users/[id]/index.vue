@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import NavigationResourceCollectionList from '~/components/navigation/NavigationResourceCollectionList.vue'
+import { Role } from '~/composables/useAppAuth'
 
 definePageMeta({
-  auth: false,
+  middleware: ['acl'],
+  requiredRole: Role.Admin,
 })
 
 const route = useRoute()
 
-const { resourceConfig, fetchItem } = useResourceSite()
+const { resourceConfig, fetchItem } = useResourceUser()
 const { item, error } = await fetchItem(route.params.id)
-const code = computed(() => item.value?.code || '')
+const code = computed(() => item.value?.email || '')
 </script>
 
 <template>
@@ -32,14 +34,14 @@ const code = computed(() => item.value?.code || '')
         <v-text-field
           :readonly="true"
           variant="underlined"
-          :model-value="item.code"
-          label="code"
+          :model-value="item.email"
+          label="email"
         ></v-text-field>
         <v-text-field
           :readonly="true"
           variant="underlined"
-          :model-value="item.name"
-          label="name"
+          :model-value="item.roles"
+          label="roles"
         ></v-text-field>
       </v-form>
     </template>

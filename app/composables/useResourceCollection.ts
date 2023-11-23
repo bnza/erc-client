@@ -1,18 +1,16 @@
-import type { UseFetchOptions } from 'nuxt/app'
-import type { SortItem, JsonLdResourceCollection, ProtectedResourceItem } from '~/composables'
+import type {
+  PaginationOptions,
+  JsonLdResourceCollection,
+  ProtectedResourceItem,
+  UseCollectionFetchOptions,
+  JsonLdResourceItem,
+} from '~/composables'
 import { defu } from 'defu'
 
 export async function useResourceCollection<
-  ResourceType extends ProtectedResourceItem<string | number>,
->(
-  url: string | (() => string),
-  options: UseFetchOptions<JsonLdResourceCollection<ResourceType>> = {},
-) {
-  const paginationOption: {
-    itemsPerPage: number
-    page: number
-    sortBy: Array<SortItem>
-  } = reactive({
+  ResourceType extends JsonLdResourceItem<string | number>,
+>(url: string | (() => string), options: UseCollectionFetchOptions<ResourceType> = {}) {
+  const paginationOption: PaginationOptions = reactive({
     itemsPerPage: 10,
     page: 1,
     sortBy: [

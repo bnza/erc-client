@@ -1,35 +1,18 @@
 import type { UseFetchOptions } from 'nuxt/app'
 import type {
   DataTableHeader,
-  ResourceConfig,
+  ApiResourceConfig,
   SiteResourceItem,
   JsonLdResourceCollection,
 } from '~/composables'
 import { useResource } from '~/composables/resources/useResource'
 
 export function useResourceSite() {
-  const resourceConfig: ResourceConfig = {
+  const resourceConfig: ApiResourceConfig = {
     apiPath: '/sites',
     appPath: '/data/sites',
     name: 'Sites',
     labels: ['Site', 'Sites'],
-  }
-
-  const { getHeaders, isAuthenticated, parseNumericId } = useResource()
-
-  async function fetchCollection(
-    options: UseFetchOptions<JsonLdResourceCollection<SiteResourceItem>> = {},
-  ) {
-    return useResourceCollection<SiteResourceItem>(resourceConfig.apiPath, options)
-  }
-
-  async function fetchItem(id: string | string[], options: UseFetchOptions<SiteResourceItem> = {}) {
-    const { data, pending, error } = await useApiFetchItem<number, SiteResourceItem>(
-      resourceConfig.apiPath,
-      parseNumericId(id),
-      options,
-    )
-    return { item: data, pending, error }
   }
 
   const defaultHeaders: Array<DataTableHeader> = [
@@ -63,6 +46,23 @@ export function useResourceSite() {
       sortable: false,
     },
   ]
+
+  const { getHeaders, isAuthenticated, parseNumericId } = useResource()
+
+  async function fetchCollection(
+    options: UseFetchOptions<JsonLdResourceCollection<SiteResourceItem>> = {},
+  ) {
+    return useResourceCollection<SiteResourceItem>(resourceConfig.apiPath, options)
+  }
+
+  async function fetchItem(id: string | string[], options: UseFetchOptions<SiteResourceItem> = {}) {
+    const { data, pending, error } = await useApiFetchItem<number, SiteResourceItem>(
+      resourceConfig.apiPath,
+      parseNumericId(id),
+      options,
+    )
+    return { item: data, pending, error }
+  }
 
   const protectedField = ['public']
 

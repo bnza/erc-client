@@ -1,10 +1,9 @@
 import type { UseFetchOptions } from 'nuxt/app'
-import type { ProtectedResourceItem } from '~/composables/resources'
+import type { JsonLdResourceItem } from '~/composables/resources'
 
-export function useApiFetchItem<IdType, ResourceType extends ProtectedResourceItem<IdType>>(
-  url: string | (() => string),
-  id: IdType,
-  options: UseFetchOptions<ResourceType> = {},
-) {
+export function useApiFetchItem<
+  IdType extends string | number,
+  ResourceType extends JsonLdResourceItem<IdType>,
+>(url: string | (() => string), id: IdType, options: UseFetchOptions<ResourceType> = {}) {
   return useApiFetch<ResourceType>(`${url}/${id}`, options)
 }
