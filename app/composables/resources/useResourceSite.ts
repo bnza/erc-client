@@ -2,8 +2,9 @@ import type { UseFetchOptions } from 'nuxt/app'
 import type {
   DataTableHeader,
   ApiResourceConfig,
-  SiteResourceItem,
-  JsonLdResourceCollection,
+  ApiSiteResourceItem,
+  LdApiResourceItem,
+  LdApiResourceCollection,
 } from '~/composables'
 import { useResource } from '~/composables/resources/useResource'
 
@@ -50,13 +51,16 @@ export function useResourceSite() {
   const { getHeaders, isAuthenticated, parseNumericId } = useResource()
 
   async function fetchCollection(
-    options: UseFetchOptions<JsonLdResourceCollection<SiteResourceItem>> = {},
+    options: UseFetchOptions<LdApiResourceCollection<ApiSiteResourceItem>> = {},
   ) {
-    return useResourceCollection<SiteResourceItem>(resourceConfig.apiPath, options)
+    return useResourceCollection<ApiSiteResourceItem>(resourceConfig.apiPath, options)
   }
 
-  async function fetchItem(id: string | string[], options: UseFetchOptions<SiteResourceItem> = {}) {
-    const { data, pending, error } = await useApiFetchItem<number, SiteResourceItem>(
+  async function fetchItem(
+    id: string | string[],
+    options: UseFetchOptions<LdApiResourceItem<ApiSiteResourceItem>> = {},
+  ) {
+    const { data, pending, error } = await useApiFetchItem<LdApiResourceItem<ApiSiteResourceItem>>(
       resourceConfig.apiPath,
       parseNumericId(id),
       options,

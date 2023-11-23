@@ -1,29 +1,3 @@
-export interface JsonLdResource extends Readonly {
-  '@context': string
-  '@id': string
-  '@type': string
-}
-export interface JsonLdResourceItem<T extends number | string> extends JsonLdResource {
-  id: T
-}
-export interface ProtectedResourceItem<T> extends JsonLdResourceItem<T> {
-  public: boolean
-}
-export interface PublicResourceItem<T> extends Omit<JsonLdResourceItem<T>, 'public'> {}
-export interface JsonLdResourceCollection<ResourceType extends JsonLdResourceItem<T>>
-  extends JsonLdResource {
-  'hydra:totalItems': number
-  'hydra:member': Array<ResourceType>
-}
-export interface SiteResourceItem extends ProtectedResourceItem<number> {
-  name: string
-  code: string
-}
-
-export interface UserResourceItem extends JsonLdResourceItem<string> {
-  email: string
-  roles: string[]
-}
 export interface ApiResourceConfig {
   apiPath: string
   appPath: string
@@ -36,22 +10,23 @@ interface ApiResourceItem<ApiId> {
   id: ApiId
 }
 
-export interface HideableApiResourceItem<ApiId> extends ApiResourceItem {
-  public: boolean
+export interface HideableApiResourceItem<ApiId> extends ApiResourceItem<ApiId> {
+  public?: boolean
 }
 
-export interface PublicApiResourceItem<ApiId> extends Omit<HideableApiResourceItem, 'public'> {}
+export interface PublicApiResourceItem<ApiId>
+  extends Omit<HideableApiResourceItem<ApiId>, 'public'> {}
 
-export interface LdApiResourceItem<ApiId> extends ApiResourceItem {
+export interface LdApiResourceItem<ApiId> extends ApiResourceItem<ApiId> {
   '@context': string
   '@id': string
   '@type': string
 }
 
-export interface LdApiResourceCollection<ResourceType extends LdApiResourceItem>
+export interface LdApiResourceCollection<ResourceType extends ApiResourceItem<ResourceType['id']>>
   extends LdApiResourceItem {
   'hydra:totalItems': number
-  'hydra:member': Array<ResourceType>
+  'hydra:member': Array<LdApiResourceItem<ResourceType['id']>>
 }
 
 export interface ApiSiteResourceItem extends HideableApiResourceItem<number> {
@@ -59,7 +34,13 @@ export interface ApiSiteResourceItem extends HideableApiResourceItem<number> {
   code: string
 }
 
+export interface LdApiSiteResourceItem extends LdApiResourceItem<ApiSiteResourceItem> {}
+export interface LdApiSiteResourceCollection extends LdApiResourceCollection<ApiSiteResourceItem> {}
+
 export interface ApiUserResourceItem extends ApiResourceItem<string> {
   email: string
   roles: string[]
 }
+
+export interface LdApiUserResourceItem extends LdApiResourceItem<ApiUserResourceItem> {}
+export interface LdApiUserResourceCollection extends LdApiResourceCollection<ApiUserResourceItem> {}

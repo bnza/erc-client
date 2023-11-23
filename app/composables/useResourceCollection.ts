@@ -1,14 +1,14 @@
 import type {
   PaginationOptions,
-  JsonLdResourceCollection,
-  ProtectedResourceItem,
+  LdApiResourceCollection,
   UseCollectionFetchOptions,
-  JsonLdResourceItem,
+  ApiResourceItem,
+  ApiId,
 } from '~/composables'
 import { defu } from 'defu'
 
 export async function useResourceCollection<
-  ResourceType extends JsonLdResourceItem<string | number>,
+  ResourceType extends ApiResourceItem<ResourceType['id']>,
 >(url: string | (() => string), options: UseCollectionFetchOptions<ResourceType> = {}) {
   const paginationOption: PaginationOptions = reactive({
     itemsPerPage: 10,
@@ -42,7 +42,7 @@ export async function useResourceCollection<
 
   const _options = defu(options, { query })
 
-  const { data, pending, error } = await useApiFetch<JsonLdResourceCollection<ResourceType>>(
+  const { data, pending, error } = await useApiFetch<LdApiResourceCollection<ResourceType>>(
     url,
     _options,
   )

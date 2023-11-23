@@ -1,5 +1,5 @@
 import type { UseFetchOptions } from 'nuxt/app'
-import type { JsonLdResourceCollection, JsonLdResourceItem } from '~/composables/resources'
+import type { LdApiResourceCollection, ApiResourceItem } from '~/composables/resources'
 import type { SortItem } from '~/composables/vuetify'
 
 export type * from './vuetify.d'
@@ -17,7 +17,7 @@ export interface PaginationOptions {
   sortBy: Array<SortItem>
 }
 
-export interface UseCollectionFetchOptions<ResourceType extends JsonLdResourceItem<string | number>>
-  extends UseFetchOptions<JsonLdResourceCollection<ResourceType>> {
+export interface UseCollectionFetchOptions<ResourceType extends ApiResourceItem<ResourceType['id']>>
+  extends UseFetchOptions<LdApiResourceCollection<ResourceType>> {
   pagination?: PaginationOptions
 }

@@ -2,8 +2,9 @@ import type { UseFetchOptions } from 'nuxt/app'
 import type {
   DataTableHeader,
   ApiResourceConfig,
-  UserResourceItem,
-  JsonLdResourceCollection,
+  ApiUserResourceItem,
+  LdApiResourceItem,
+  LdApiResourceCollection,
 } from '~/composables'
 
 export function useResourceUser() {
@@ -36,13 +37,16 @@ export function useResourceUser() {
   ]
 
   async function fetchCollection(
-    options: UseFetchOptions<JsonLdResourceCollection<UserResourceItem>> = {},
+    options: UseFetchOptions<LdApiResourceCollection<ApiUserResourceItem>> = {},
   ) {
-    return useResourceCollection<UserResourceItem>(resourceConfig.apiPath, options)
+    return useResourceCollection<ApiUserResourceItem>(resourceConfig.apiPath, options)
   }
 
-  async function fetchItem(id: string | string[], options: UseFetchOptions<UserResourceItem> = {}) {
-    const { data, pending, error } = await useApiFetchItem<string, UserResourceItem>(
+  async function fetchItem(
+    id: string | string[],
+    options: UseFetchOptions<ApiUserResourceItem> = {},
+  ) {
+    const { data, pending, error } = await useApiFetchItem<ApiUserResourceItem>(
       resourceConfig.apiPath,
       Array.isArray(id) ? id[0] : id,
       options,
