@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import type { PropType } from "vue";
-import type { Resource } from "~/composables";
-
 defineProps({
   title: String,
   code: {

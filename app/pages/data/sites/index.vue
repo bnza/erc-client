@@ -5,14 +5,14 @@ definePageMeta({
   auth: false,
 });
 
-const { resource, headers, fetchCollection } = useResourceSite();
+const { resourceConfig, headers, fetchCollection } = useResourceSite();
 
 const { items, paginationOption, totalItems, pending } =
   await fetchCollection();
 </script>
 
 <template>
-  <app-data-card :title="resource.label[1]">
+  <app-data-card :title="resourceConfig.labels[1]">
     <template #default>
       <v-data-table-server
         :items-per-page.sync="paginationOption.itemsPerPage"
@@ -27,7 +27,7 @@ const { items, paginationOption, totalItems, pending } =
       >
         <template #[`item.id`]="{ item }">
           <navigation-resource-item
-            :resource="resource"
+            :resource="resourceConfig"
             :item-id="item.id"
           ></navigation-resource-item>
         </template>

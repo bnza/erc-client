@@ -48,13 +48,12 @@ export async function useResourceCollection<
 
   const _options = defu(options, { query });
 
-  const { data, pending, error } = await useApiFetchCollection<ResourceType>(
-    url,
-    _options,
-  );
+  const { data, pending, error } = await useApiFetch<
+    JsonLdResourceCollection<ResourceType>
+  >(url, _options);
 
   const items = computed(() => data.value?.["hydra:member"]);
   const totalItems = computed(() => data.value?.["hydra:totalItems"] || 0);
 
-  return { items, totalItems, paginationOption, pending };
+  return { items, totalItems, error, paginationOption, pending };
 }

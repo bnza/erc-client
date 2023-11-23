@@ -1,18 +1,18 @@
 import type { UseFetchOptions } from "nuxt/app";
 import type {
   DataTableHeader,
-  Resource,
+  ResourceConfig,
   SiteResourceItem,
   JsonLdResourceCollection,
 } from "~/composables";
 import { useResource } from "~/composables/resources/useResource";
 
 export function useResourceSite() {
-  const resource: Resource = {
+  const resourceConfig: ResourceConfig = {
     apiPath: "/sites",
     appPath: "/data/sites",
     name: "Sites",
-    label: ["Site", "Sites"],
+    labels: ["Site", "Sites"],
   };
 
   const { getHeaders, isAuthenticated, parseNumericId } = useResource();
@@ -20,7 +20,10 @@ export function useResourceSite() {
   async function fetchCollection(
     options: UseFetchOptions<JsonLdResourceCollection<SiteResourceItem>> = {},
   ) {
-    return useResourceCollection<SiteResourceItem>(resource.apiPath, options);
+    return useResourceCollection<SiteResourceItem>(
+      resourceConfig.apiPath,
+      options,
+    );
   }
 
   async function fetchItem(
@@ -30,7 +33,7 @@ export function useResourceSite() {
     const { data, pending, error } = await useApiFetchItem<
       number,
       SiteResourceItem
-    >(resource.apiPath, parseNumericId(id), options);
+    >(resourceConfig.apiPath, parseNumericId(id), options);
     return { item: data, pending, error };
   }
 
@@ -70,5 +73,11 @@ export function useResourceSite() {
 
   const headers = getHeaders.value(defaultHeaders, protectedField);
 
-  return { resource, headers, isAuthenticated, fetchCollection, fetchItem };
+  return {
+    resourceConfig,
+    headers,
+    isAuthenticated,
+    fetchCollection,
+    fetchItem,
+  };
 }

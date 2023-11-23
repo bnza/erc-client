@@ -7,7 +7,7 @@ definePageMeta({
 
 const route = useRoute();
 
-const { resource, fetchItem } = useResourceSite();
+const { resourceConfig, fetchItem } = useResourceSite();
 const { item, error } = await fetchItem(route.params.id);
 const code = computed(() => item.value?.code || "");
 </script>
@@ -21,7 +21,7 @@ const code = computed(() => item.value?.code || "");
       text="Requested resource could not be found"
     ></v-alert>
   </p>
-  <app-data-card v-else :title="resource.label[0]" :code="code">
+  <app-data-card v-else :title="resourceConfig.labels[0]" :code="code">
     <template #default>
       <v-form v-if="item" @submit.prevent class="pa-6">
         <v-text-field

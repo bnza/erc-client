@@ -49,7 +49,6 @@ export function useApiFetch<ResourceType>(
         signOut({ callbackUrl: "/" });
       }
       console.log(_ctx);
-      // throw new myBusinessError()
     },
     watch: [_url],
   };
