@@ -7,6 +7,10 @@ export type * from './resources'
 export { useResourceSite } from './resources/useResourceSite'
 export { useResourceUser } from './resources/useResourceUser'
 
+export enum UiMode {
+  Default,
+  Map,
+}
 export enum ResourceLabelNumber {
   Singular,
   Plural,

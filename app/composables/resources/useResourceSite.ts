@@ -8,6 +8,7 @@ import type {
 } from '~/composables'
 import { useResource } from '~/composables/resources/useResource'
 
+type ResourceItemType = ApiSiteResourceItem
 export function useResourceSite() {
   const resourceConfig: ApiResourceConfig = {
     apiPath: '/sites',

@@ -4,6 +4,7 @@ import { useUiAppNavigationDrawerStore } from '~/stores/ui'
 const { isAuthenticated, userIdentifier } = useAppAuth()
 
 const uiStore = useUiAppNavigationDrawerStore()
+const tab = ref(null)
 </script>
 
 <template>
@@ -20,17 +21,11 @@ const uiStore = useUiAppNavigationDrawerStore()
       </v-tooltip>
     </template>
 
-    <v-app-bar-title class="title font-weight-bold">ERC MEDGREENREV project</v-app-bar-title>
-
-    <v-spacer></v-spacer>
+    <slot name="center"></slot>
 
     <p v-if="isAuthenticated" class="mr-6">{{ userIdentifier }}</p>
-    <auth-app-bar-icon></auth-app-bar-icon>
+    <template #append>
+      <auth-app-bar-icon></auth-app-bar-icon>
+    </template>
   </v-app-bar>
 </template>
-
-<style scoped lang="sass">
-.title
-  font-family: 'Orbitron', 'Work Sans', Arial, sans-serif !important
-  font-weight: 900
-</style>

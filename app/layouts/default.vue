@@ -1,9 +1,11 @@
-<script setup lang="ts">
-import AppFooter from '~/components/AppFooter.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <app-bar></app-bar>
+  <app-bar>
+    <template #center>
+      <slot name="app-bar-center"></slot>
+    </template>
+  </app-bar>
   <app-navigation-drawer></app-navigation-drawer>
   <v-main class="d-flex align-center justify-center">
     <slot></slot>

@@ -4,6 +4,8 @@ definePageMeta({
 })
 const { hasRoleAdmin } = useAppAuth()
 const { resourceConfig } = useResourceSite()
+const a = ref(false)
+defineOptions({ name: 'sites' })
 </script>
 
 <template>

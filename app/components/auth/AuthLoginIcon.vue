@@ -3,9 +3,7 @@ import { useLoginRedirectStore } from '~/stores/loginRedirect'
 
 const route = useRoute()
 const { setPreviousPath } = useLoginRedirectStore()
-/*onMounted(() => {
-  console.log(route.fullPath);
-});*/
+
 watch(
   () => route.fullPath,
   () => {

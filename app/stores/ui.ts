@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { UiMode } from '~/composables'
 export const useUiAppNavigationDrawerStore = defineStore('uiAppNavigationDrawer', () => {
   const visible = ref(false)
 
@@ -7,6 +8,26 @@ export const useUiAppNavigationDrawerStore = defineStore('uiAppNavigationDrawer'
   }
 
   return { visible, toggleVisible }
+})
+
+export const useUiAppMode = defineStore('uiAppMode', () => {
+  const mode: UiMode = ref(UiMode.Default)
+
+  const icon = computed(() =>
+    mode.value === UiMode.Default ? 'mdi-list-box-outline' : 'mdi-earth',
+  )
+
+  function setMode(newMode: UiMode) {
+    mode.value = newMode
+    console.log('new mode', newMode)
+  }
+
+  function toggleMode() {
+    const newMode = mode.value === UiMode.Default ? UiMode.Map : UiMode.Default
+    setMode(newMode)
+  }
+
+  return { mode, icon, setMode, toggleMode }
 })
 
 export const useUiAppSnackbar = defineStore('uiAppSnackbar', () => {
