@@ -17,7 +17,8 @@ export interface HideableApiResourceItem<ApiId> extends ApiResourceItem<ApiId> {
 export interface PublicApiResourceItem<ApiId>
   extends Omit<HideableApiResourceItem<ApiId>, 'public'> {}
 
-export interface LdApiResourceItem<ApiId> extends ApiResourceItem<ApiId> {
+export interface LdApiResourceItem<ResourceType extends ApiResourceItem<ResourceType['id']>>
+  extends ResourceType {
   '@context': string
   '@id': string
   '@type': string
