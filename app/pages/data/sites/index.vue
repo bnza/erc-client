@@ -4,8 +4,6 @@ definePageMeta({
 })
 const { hasRoleAdmin } = useAppAuth()
 const { resourceConfig } = useResourceSite()
-const a = ref(false)
-defineOptions({ name: 'sites' })
 </script>
 
 <template>
@@ -17,7 +15,7 @@ defineOptions({ name: 'sites' })
       ></navigation-resource-item-create>
     </template>
     <template #default>
-      <data-collection-table-site></data-collection-table-site>
+      <lazy-data-collection-table-site></lazy-data-collection-table-site>
     </template>
   </app-data-card>
 </template>

@@ -14,7 +14,10 @@ defineProps({
       :resource="resource"
       :item-id="itemId"
     ></navigation-resource-item-read>
-    <navigation-resource-item-edit :item-id="itemId"></navigation-resource-item-edit>
+    <navigation-resource-item-edit
+      :item-id="itemId"
+      :resource="resource"
+    ></navigation-resource-item-edit>
     <navigation-resource-item-delete :item-id="itemId"></navigation-resource-item-delete>
   </v-btn-group>
 </template>

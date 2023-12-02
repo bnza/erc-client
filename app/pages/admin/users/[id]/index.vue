@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import NavigationResourceCollectionList from '~/components/navigation/NavigationResourceCollectionList.vue'
-import { Role } from '~/composables/useAppAuth'
 
 definePageMeta({
   middleware: ['acl'],
@@ -8,9 +7,9 @@ definePageMeta({
 })
 
 const route = useRoute()
-
+const id = routeParamIdToString(route.params.id)
 const { resourceConfig, fetchItem } = useResourceUser()
-const { item, error } = await fetchItem(route.params.id)
+const { item, error } = await fetchItem(id)
 const code = computed(() => item.value?.email || '')
 </script>
 

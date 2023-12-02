@@ -19,9 +19,14 @@ const { mode } = storeToRefs(useUiAppMode())
     <KeepAlive>
       <lazy-app-map v-if="mode === UiMode.Map"></lazy-app-map>
     </KeepAlive>
-    <KeepAlive>
-      <NuxtPage v-if="mode === UiMode.Default" />
-    </KeepAlive>
+    <Suspense>
+      <KeepAlive>
+        <NuxtPage v-if="mode === UiMode.Default" />
+      </KeepAlive>
+      <template #fallback>
+        <v-progress-circular indeterminate :size="128" :width="12"></v-progress-circular>
+      </template>
+    </Suspense>
   </NuxtLayout>
 </template>
 

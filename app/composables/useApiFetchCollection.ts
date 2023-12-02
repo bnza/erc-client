@@ -7,7 +7,7 @@ import type {
 } from '~/composables'
 import { defu } from 'defu'
 
-export async function useResourceCollection<
+export async function useApiFetchCollection<
   ResourceType extends ApiResourceItem<ResourceType['id']>,
 >(url: string | (() => string), options: UseCollectionFetchOptions<ResourceType> = {}) {
   const paginationOption: PaginationOptions = reactive({

@@ -1,18 +1,14 @@
 import type { UseFetchOptions } from 'nuxt/app'
-import type {
-  DataTableHeader,
-  ApiResourceConfig,
-  ApiUserResourceItem,
-  LdApiResourceItem,
-  LdApiResourceCollection,
-} from '~/composables'
+import type { DataTableHeader, ApiResourceConfig, ApiUserResourceItem } from '~/composables'
+import { useResource } from '~/composables/resources/useResource'
 
 export function useResourceUser() {
-  const resourceConfig: ApiResourceConfig = {
+  const resourceConfig: ApiResourceConfig<ApiUserResourceItem> = {
     apiPath: '/admin/users',
     appPath: '/admin/users',
     name: 'Users',
     labels: ['User', 'Users'],
+    getCodeFn: (item) => () => item?.email || '',
   }
 
   const defaultHeaders: Array<DataTableHeader> = [
@@ -36,23 +32,12 @@ export function useResourceUser() {
     },
   ]
 
-  async function fetchCollection(
-    options: UseFetchOptions<LdApiResourceCollection<ApiUserResourceItem>> = {},
-  ) {
-    return useResourceCollection<ApiUserResourceItem>(resourceConfig.apiPath, options)
-  }
-
-  async function fetchItem(
-    id: string | string[],
-    options: UseFetchOptions<ApiUserResourceItem> = {},
-  ) {
-    const { data, pending, error } = await useApiFetchItem<ApiUserResourceItem>(
-      resourceConfig.apiPath,
-      Array.isArray(id) ? id[0] : id,
-      options,
-    )
-    return { item: data, pending, error }
-  }
+  const { headers, isAuthenticated, fetchCollection, fetchItem } = useResource<ApiUserResourceItem>(
+    {
+      resourceConfig,
+      defaultHeaders,
+    },
+  )
 
   return {
     resourceConfig,

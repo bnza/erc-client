@@ -1,8 +1,9 @@
-export interface ApiResourceConfig {
+export interface ApiResourceConfig<ResourceType extends ApiResourceItem<ResourceType['id']>> {
   apiPath: string
   appPath: string
   name: string
   labels: [string, string]
+  getCodeFn: (item: ResourceType | null) => () => string
 }
 
 export type ApiId = number | string
@@ -27,8 +28,10 @@ export interface LdApiResourceItem<ResourceType extends ApiResourceItem<Resource
 export interface LdApiResourceCollection<ResourceType extends ApiResourceItem<ResourceType['id']>>
   extends LdApiResourceItem {
   'hydra:totalItems': number
-  'hydra:member': Array<LdApiResourceItem<ResourceType['id']>>
+  'hydra:member': Array<ResourceType>
 }
+
+type GetCodeFn = (item: LdApiResourceItem) => () => string
 
 export interface ApiSiteResourceItem extends HideableApiResourceItem<number> {
   name: string

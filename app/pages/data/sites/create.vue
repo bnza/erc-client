@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Role } from '~/composables/useAppAuth'
 import NavigationResourceCollectionList from '~/components/navigation/NavigationResourceCollectionList.vue'
 import type { SiteResourceItem } from '~/composables'
 type Mutable<Type> = {

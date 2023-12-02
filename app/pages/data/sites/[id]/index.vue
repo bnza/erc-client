@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import NavigationResourceCollectionList from '~/components/navigation/NavigationResourceCollectionList.vue'
-
 definePageMeta({
   auth: false,
 })
 
 const route = useRoute()
 
+const id = routeParamIdToString(route.params.id)
 const { resourceConfig, fetchItem } = useResourceSite()
-const { item, error } = await fetchItem(route.params.id)
-const code = computed(() => item.value?.code || '')
+const { item, error, code } = await fetchItem(id)
 </script>
 
 <template>

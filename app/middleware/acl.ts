@@ -9,6 +9,12 @@ export default defineNuxtRouteMiddleware((to) => {
   }
 
   if (!isAuthenticated.value) {
+    useUiAppSnackbar().show({
+      _text: 'Unauthenticated user in ACL middleware',
+      _color: 'error',
+      _vertical: true,
+      _timeout: -1,
+    })
     return abortNavigation('Unauthenticated user in ACL middleware')
   }
 

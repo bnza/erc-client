@@ -11,7 +11,7 @@ export const useUiAppNavigationDrawerStore = defineStore('uiAppNavigationDrawer'
 })
 
 export const useUiAppMode = defineStore('uiAppMode', () => {
-  const mode: UiMode = ref(UiMode.Default)
+  const mode: Ref<UiMode> = ref(UiMode.Default)
 
   const icon = computed(() =>
     mode.value === UiMode.Default ? 'mdi-list-box-outline' : 'mdi-earth',

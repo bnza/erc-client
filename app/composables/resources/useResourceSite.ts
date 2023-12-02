@@ -4,17 +4,17 @@ import type {
   ApiResourceConfig,
   ApiSiteResourceItem,
   LdApiResourceItem,
-  LdApiResourceCollection,
+  UsePatchItemFetchOptions,
 } from '~/composables'
 import { useResource } from '~/composables/resources/useResource'
 
-type ResourceItemType = ApiSiteResourceItem
 export function useResourceSite() {
-  const resourceConfig: ApiResourceConfig = {
+  const resourceConfig: ApiResourceConfig<ApiSiteResourceItem> = {
     apiPath: '/sites',
     appPath: '/data/sites',
     name: 'Sites',
     labels: ['Site', 'Sites'],
+    getCodeFn: (item) => () => item?.code || '',
   }
 
   const defaultHeaders: Array<DataTableHeader> = [
@@ -23,12 +23,14 @@ export function useResourceSite() {
       value: 'id',
       title: 'ID',
       align: 'center',
+      width: '200',
       maxWidth: '200',
     },
     {
       key: 'code',
       value: 'code',
       title: 'code',
+      width: '200',
     },
     {
       key: 'name',
@@ -49,29 +51,14 @@ export function useResourceSite() {
     },
   ]
 
-  const { getHeaders, isAuthenticated, parseNumericId } = useResource()
+  const protectedFields = ['public']
 
-  async function fetchCollection(
-    options: UseFetchOptions<LdApiResourceCollection<ApiSiteResourceItem>> = {},
-  ) {
-    return useResourceCollection<ApiSiteResourceItem>(resourceConfig.apiPath, options)
-  }
-
-  async function fetchItem(
-    id: string | string[],
-    options: UseFetchOptions<LdApiResourceItem<ApiSiteResourceItem>> = {},
-  ) {
-    const { data, pending, error } = await useApiFetchItem<LdApiResourceItem<ApiSiteResourceItem>>(
-      resourceConfig.apiPath,
-      parseNumericId(id),
-      options,
-    )
-    return { item: data, pending, error }
-  }
-
-  const protectedField = ['public']
-
-  const headers = getHeaders.value(defaultHeaders, protectedField)
+  const { headers, isAuthenticated, fetchCollection, fetchItem, patchItem } =
+    useResource<ApiSiteResourceItem>({
+      resourceConfig,
+      defaultHeaders,
+      protectedFields,
+    })
 
   return {
     resourceConfig,
@@ -79,5 +66,6 @@ export function useResourceSite() {
     isAuthenticated,
     fetchCollection,
     fetchItem,
+    patchItem,
   }
 }
