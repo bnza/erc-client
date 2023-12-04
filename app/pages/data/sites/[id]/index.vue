@@ -39,6 +39,12 @@ const { item, error, code } = await fetchItem(id)
           :model-value="item.name"
           label="name"
         ></v-text-field>
+        <v-textarea
+          :readonly="true"
+          variant="underlined"
+          label="description"
+          v-model="item.description"
+        ></v-textarea>
       </v-form>
     </template>
   </app-data-card>

@@ -20,7 +20,7 @@ async function submit() {
 
   if (valid && item.value !== null) {
     const { pending, error } = await patchItem(id, {}, item.value, state)
-    if (!error.value) {
+    if (!error?.value) {
       await router.replace(`${resourceConfig.appPath}/${id}`)
     }
   }
@@ -51,7 +51,6 @@ async function submit() {
     <template #default>
       <v-form v-if="state" @submit.prevent class="pa-6">
         <v-text-field
-          variant="underlined"
           required
           v-model="state.code"
           :error-messages="v$.code.$errors.map((e) => e.$message)"
@@ -60,7 +59,6 @@ async function submit() {
           @blur="v$.code.$touch"
         ></v-text-field>
         <v-text-field
-          variant="underlined"
           required
           v-model="state.name"
           :error-messages="v$.name.$errors.map((e) => e.$message)"
@@ -68,6 +66,7 @@ async function submit() {
           @input="v$.name.$touch"
           @blur="v$.name.$touch"
         ></v-text-field>
+        <v-textarea label="description" v-model="state.description"></v-textarea>
       </v-form>
     </template>
   </app-data-card>

@@ -1,6 +1,6 @@
 import type { ApiSiteResourceItem, LdApiResourceItem } from '~/composables'
 import useVuelidate from '@vuelidate/core'
-import { required, helpers } from '@vuelidate/validators'
+import { required, maxLength, helpers } from '@vuelidate/validators'
 import { FORM_REQUIRED_FIELD } from './messages'
 
 export function useResourceSiteValidation(
@@ -11,6 +11,7 @@ export function useResourceSiteValidation(
   const rules = {
     code: {
       required: helpers.withMessage(FORM_REQUIRED_FIELD, required),
+      maxLength: maxLength(3),
     },
     name: {
       required: helpers.withMessage(FORM_REQUIRED_FIELD, required),

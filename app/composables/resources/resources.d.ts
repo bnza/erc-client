@@ -36,6 +36,7 @@ type GetCodeFn = (item: LdApiResourceItem) => () => string
 export interface ApiSiteResourceItem extends HideableApiResourceItem<number> {
   name: string
   code: string
+  description?: string
 }
 
 export interface LdApiSiteResourceItem extends LdApiResourceItem<ApiSiteResourceItem> {}
