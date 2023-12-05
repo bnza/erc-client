@@ -5,7 +5,6 @@ import type {
   ApiResourceItem,
   LdApiResourceItem,
   UseCollectionFetchOptions,
-  UsePatchItemFetchOptions,
 } from '~/composables'
 
 export function useResource<ResourceType extends ApiResourceItem<ApiId>>(

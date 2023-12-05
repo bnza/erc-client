@@ -3,7 +3,6 @@ import type {
   LdApiResourceCollection,
   UseCollectionFetchOptions,
   ApiResourceItem,
-  ApiId,
 } from '~/composables'
 import { defu } from 'defu'
 

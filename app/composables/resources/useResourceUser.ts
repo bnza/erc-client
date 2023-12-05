@@ -1,4 +1,3 @@
-import type { UseFetchOptions } from 'nuxt/app'
 import type { DataTableHeader, ApiResourceConfig, ApiUserResourceItem } from '~/composables'
 import { useResource } from '~/composables/resources/useResource'
 

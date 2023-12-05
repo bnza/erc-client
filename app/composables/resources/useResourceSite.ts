@@ -1,11 +1,4 @@
-import type { UseFetchOptions } from 'nuxt/app'
-import type {
-  DataTableHeader,
-  ApiResourceConfig,
-  ApiSiteResourceItem,
-  LdApiResourceItem,
-  UsePatchItemFetchOptions,
-} from '~/composables'
+import type { DataTableHeader, ApiResourceConfig, ApiSiteResourceItem } from '~/composables'
 import { useResource } from '~/composables/resources/useResource'
 
 export function useResourceSite() {
